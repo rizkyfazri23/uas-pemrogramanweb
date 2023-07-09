@@ -1,8 +1,6 @@
 <?php
-// Include file koneksi.php untuk melakukan koneksi database
 include 'koneksi.php';
 
-// Function untuk menyimpan data siswa ke database
 function tambahSiswa($nis, $nama, $jenisKelamin, $telepon, $alamat, $foto) {
     global $con;
 
@@ -12,7 +10,6 @@ function tambahSiswa($nis, $nama, $jenisKelamin, $telepon, $alamat, $foto) {
     return $result;
 }
 
-// Function untuk mengambil data siswa dari database
 function getDataSiswa() {
     global $con;
 
@@ -27,7 +24,6 @@ function getDataSiswa() {
     return $dataSiswa;
 }
 
-// Function untuk menghapus data siswa dari database
 function hapusSiswa($id) {
     global $con;
 
@@ -37,7 +33,6 @@ function hapusSiswa($id) {
     return $result;
 }
 
-// Function untuk mengupdate data siswa ke database
 function updateSiswa($id, $nis, $nama, $jenisKelamin, $telepon, $alamat, $foto) {
     global $con;
 
@@ -47,7 +42,6 @@ function updateSiswa($id, $nis, $nama, $jenisKelamin, $telepon, $alamat, $foto) 
     return $result;
 }
 
-// Menyimpan data saat form tambah disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah'])) {
     $nis = $_POST['nis'];
     $nama = $_POST['nama'];
@@ -57,28 +51,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['tambah'])) {
     $foto = $_FILES['foto']['name'];
     $tempFoto = $_FILES['foto']['tmp_name'];
 
-    // Upload foto ke folder
     move_uploaded_file($tempFoto, 'uploads/' . $foto);
 
-    // Panggil fungsi tambahSiswa
     tambahSiswa($nis, $nama, $jenisKelamin, $telepon, $alamat, $foto);
 
     header("Location: index.php");
     exit();
 }
 
-// Menghapus data saat tombol hapus diklik
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['hapus'])) {
     $idSiswa = $_GET['hapus'];
 
-    // Panggil fungsi hapusSiswa
     hapusSiswa($idSiswa);
 
     header("Location: index.php");
     exit();
 }
 
-// Mengambil data siswa dari database
 $dataSiswa = getDataSiswa();
 ?>
 
@@ -90,7 +79,6 @@ $dataSiswa = getDataSiswa();
 <body>
     <h2>CRUD Siswa</h2>
 
-    <!-- Form Tambah Siswa -->
     <h3>Tambah Siswa</h3>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
         <div>
@@ -123,7 +111,6 @@ $dataSiswa = getDataSiswa();
         </div>
     </form>
 
-    <!-- Daftar Siswa -->
     <h3>Daftar Siswa</h3>
     <table>
         <thead>

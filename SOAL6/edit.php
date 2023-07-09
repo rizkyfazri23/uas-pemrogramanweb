@@ -33,10 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
     $foto = $_FILES['foto']['name'];
     $tempFoto = $_FILES['foto']['tmp_name'];
 
-    // Upload foto ke folder
     move_uploaded_file($tempFoto, 'uploads/' . $foto);
 
-    // Panggil fungsi updateSiswa
     updateSiswa($idSiswa, $nis, $nama, $jenisKelamin, $telepon, $alamat, $foto);
 
     header("Location: index.php");
@@ -52,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
 <body>
     <h2>Edit Siswa</h2>
 
-    <!-- Form Edit Siswa -->
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . '?id=' . $idSiswa; ?>" enctype="multipart/form-data">
         <div>
             <label for="nis">NIS:</label>

@@ -1,7 +1,6 @@
 <?php
 include 'koneksi.php';
 
-// Fungsi untuk menyimpan data buku tamu ke database
 function simpanData($nama, $email, $isi) {
     global $con;
 
